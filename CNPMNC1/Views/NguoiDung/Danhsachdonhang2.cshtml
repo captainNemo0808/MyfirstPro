@@ -1,0 +1,102 @@
+﻿@model IEnumerable<CNPMNC1.Models.DanhSachDonHang>
+
+@{
+    ViewBag.Title = "Danhsachdonhang2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+</p>
+@Html.ActionLink("Lọc theo tài khoản", "loctheotaikhoan")
+<td colspan="4">
+    @using (Html.BeginForm("Loctheongay", "NguoiDung"))
+    {
+        <table style="border-collapse:separate; border-spacing:5px;">
+            <tr>
+                <td>Ngày : </td>
+                <td><input type="number" name="Ngay" required min="1" max="31" onchange="updateMaxValues()" /></td>
+                <td>    </td>
+                <td>tháng : </td>
+                <td><input type="number" name="thang" required min="1" max="12" onchange="updateMaxValues()" /></td>
+                <td>    </td>
+                <td>năm : </td>
+                <td><input type="number" name="nam" required max="@DateTime.Now.Year" onchange="updateMaxValues()" /></td>
+                <td>    </td>
+                <td>
+                    <input type="submit" value="Lọc" class="btn btn-success" />
+                </td>
+            </tr>
+        </table>
+    }
+</td>
+<script>
+    function updateMaxValues() {
+        var yearInput = document.querySelector('[name="nam"]');
+        var monthInput = document.querySelector('[name="thang"]');
+        var dayInput = document.querySelector('[name="Ngay"]');
+
+        var currentYear = @DateTime.Now.Year;
+        var currentMonth = @DateTime.Now.Month;
+        var currentDay = @DateTime.Now.Day;
+
+        if (yearInput.value == currentYear) {
+            monthInput.max = currentMonth;
+            if (monthInput.value == currentMonth) {
+                dayInput.max = currentDay;
+            } else {
+                dayInput.max = 31;
+            }
+        } else {
+            monthInput.max = 12;
+            dayInput.max = 31;
+        }
+    }
+</script>
+
+@Html.ActionLink("Đơn Hàng Đang Duyệt", "Danhsachloctheotinhtrang", new { tinhtrang = "Đang Duyệt" }) |
+@Html.ActionLink("Đơn Hàng Đã Duyệt", "Danhsachloctheotinhtrang", new { tinhtrang = "Đã Duyệt" }) |
+@Html.ActionLink("Đơn Hàng Đang Giao", "Danhsachloctheotinhtrang", new { tinhtrang = "Đang Giao" })  |
+@Html.ActionLink("Đơn Hàng Đã Giao", "Danhsachloctheotinhtrang", new { tinhtrang = "Đã Giao" })
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Tinhtrang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngaydathang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tongtien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phuongthuctt)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Tinhtrang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngaydathang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tongtien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phuongthuctt)
+            </td>
+            <td>
+                @Html.ActionLink("CHỉnh Sửa Đơn Hàng", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("chitietdonhang", "chitietdonhang", new { id = item.ID }) |
+                @Html.ActionLink("Xóa ĐƠn Hàng", "Delete2", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

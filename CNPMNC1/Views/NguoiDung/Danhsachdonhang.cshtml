@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CNPMNC1.Models.DanhSachDonHang>
+
+@{
+    ViewBag.Title = "Danhsachdonhang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danhsachdonhang</h2>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Tinhtrang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngaydathang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tongtien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phuongthuctt)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tinhtrang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngaydathang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tongtien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phuongthuctt)
+        </td>
+        <td>
+            <a href="@Url.Action("chitietdonhang","NguoiDung",new {id = item.ID})">Chi Tiết Đơn Hàng</a>
+            <a>@Html.ActionLink("Hủy ĐƠn", "Delete", new { id = item.ID })</a> 
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CNPMNC1.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 style="padding: 50px 0px;">Danh sách sản phẩm</h2>
+<div class="container">
+    <div class="row">
+        @foreach (var pro in Model)
+        {
+            <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3" style="width: 200px; margin-bottom: 30px; padding: 0px; margin-right: 50px; padding-bottom: 10px; border-radius: 20px; box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15); ">
+                <div class="card-pro">
+                    <img src="@Url.Content(pro.ImagePro)" height="150" width="150" style="border-radius: 16px; width: 200px;" />
+                    <p style="padding: 5px 20px">@Html.DisplayFor(model => pro.tensanpham)</p>
+                    <p class="price" style="padding: 5px 20px; color: red; font-weight: 700;">@Html.DisplayFor(model => pro.gia) </p>
+                    <a style="padding: 5px 20px; text-decoration: none; color: red; " href="@Url.Action("Edit","SanPham", new {id = pro.idsanpham})">Chỉnh Sửa</a>
+                    <a style="padding: 5px 20px; text-decoration: none; color: red; " href="@Url.Action("Delete","SanPham", new {id = pro.idsanpham})">Xóa</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var priceElements = document.querySelectorAll(".price");
+
+        priceElements.forEach(function (element) {
+            var priceValue = element.textContent;
+            var formattedPrice = formatPrice(priceValue);
+            element.textContent = formattedPrice;
+        });
+
+        function formatPrice(price) {
+            // Chuyển đổi thành số nguyên
+            var integerPart = parseInt(price);
+            // Thêm dấu phẩy ngăn cách hàng ngàn
+            var formattedPrice = integerPart.toLocaleString("vi-VN");
+            // Thêm đơn vị tiền tệ
+            formattedPrice += " đ";
+            return formattedPrice;
+        }
+    });
+</script>

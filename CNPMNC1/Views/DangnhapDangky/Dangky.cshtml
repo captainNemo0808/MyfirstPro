@@ -1,0 +1,79 @@
+﻿@model CNPMNC1.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "Dangky";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
+<body style="max-width:12000px; margin:auto;">
+    <div style="argin-top: 100px;text-align: center; margin-bottom: 25px;">
+        <h2 style=" padding: 30px 0px;">Đăng ký Smember</h2>
+        <div>
+            <img src="~/Content/images/img.jpg" />
+        </div>
+        @using (Html.BeginForm("Dangky", "DangnhapDangky", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            if (ViewBag.ErrorRegister != null)
+            {
+                <p>@ViewBag.ErrorRegister</p>
+            }
+            <div>
+                <tr>
+                    <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                        <p style=" margin: 0px;">Nhập Email Tài Khoản: </p>
+                        <input id="email" name="email" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+                    <td>@Html.ValidationMessageFor(model => model.email)</td>
+            </div>
+            </tr>
+            <tr>
+                <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                    <p style=" margin: 0px;">Nhập Mật Khẩu Tài Khoản: </p>
+                    <input id="pass" name="pass" type="password" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+                <td>@Html.ValidationMessageFor(model => model.pass)</td>
+        </div>
+        </tr>
+        <tr>
+            <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                <p style=" margin: 0px;">Nhập Số Điện Thoài Tài Khoản: </p>
+                <input id="phone" name="phone" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+            <td>@Html.ValidationMessageFor(model => model.phone)</td>
+            @if (ViewBag.ErrorInfo == null)
+            {
+                <p> @ViewBag.ErrorInfo</p>
+            }
+            </div>
+        </tr>
+        <tr>
+            <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                <p style=" margin: 0px;">Nhập Tên Tài Khoản: </p>
+                <input id="name" name="name" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+            <td>@Html.ValidationMessageFor(model => model.name)</td>
+            </div>
+        </tr>
+        <tr>
+            <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                <p style=" margin: 0px;">Nhập Địa Chỉ: </p>
+                <input id="diachi" name="diachi" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+            <td>@Html.ValidationMessageFor(model => model.diachi)</td>
+            </div>
+        </tr>
+        <tr>
+            <div style="padding: 20px 0px; ">
+            <td><a href="@Url.Action("DangNhap","DangnhapDangky")" style="padding: 6px 40px; border-radius: 10px; border: 1px; margin-right: 20px; background-color: #ff255b; color: black; text-decoration: none; ">Đăng Nhập</a></td>
+            <td><input type="submit" value="Đăng Ký" style=" padding: 5px 30px; border-radius: 10px; border: 1px; background-color: #ff255b;" /></td>
+            </div>
+        </tr>
+        </div>
+    }
+        </div>
+    </body>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

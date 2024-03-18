@@ -1,0 +1,100 @@
+﻿@model  CNPMNC1.Models.Cart
+@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 style="text-align: center; padding: 30px 0px; ">Giỏ Hàng Của Bạn</h2>
+<a style=" color: red; text-decoration: none; padding: 1px 0px; margin-left: 578px;" href="@Url.Action("Index2","SanPham")">TIếp tục mua hàng</a>
+@if (Model != null)
+{
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                decimal total = item.quantity * (decimal)item.sanPham.gia.Value * (decimal)item.sanPham.giamgia.Value;
+                decimal total2 = item.quantity * (decimal)item.sanPham.gia.Value - (decimal)total;
+                decimal giamgia = item.sanPham.giamgia.Value * 100;
+                <div style="margin-left: 300px; margin-top: 20px; width: 652px; padding: 57px; border: 1px solid #e9e9e9; border-radius: 25px; box-shadow: 3px 3px #c7c4c4; margin-bottom: 20px; ">
+                    <div style="display: flex; justify-content: space-between;">
+                        <img src="@Url.Content(item.sanPham.ImagePro)" height="50" width="50" />
+                        <div>
+                            <p>@Html.DisplayFor(model => item.sanPham.tensanpham)</p>
+                            <p class="price">@Html.DisplayFor(model => item.sanPham.gia)</p>
+                        </div>
+                        <div>
+                            <a style="color: red; text-decoration: none; padding-left: 86px;" href="@Url.Action("RemoveCart","GioHang", new {id = item.sanPham.idsanpham})">Xoa</a>
+                            <p style="padding-left: 17px;">
+                                @using (Html.BeginForm("update_cart_quantity", "GioHang"))
+                                {
+                                    <input type="hidden" value="@item.sanPham.idsanpham" name="ID" style="border: 0px; width: 35px;" />
+                                    <input type="number" value="@item.quantity" name="carquantity" style="border: 0px; width: 35px;" required min="1" />
+                                    <input type="submit" value="Update" style="color: red; background-color: white; border: 0px;" />
+                                }
+                            </p>
+                        </div>
+                    </div>
+                    <p>@Html.DisplayFor(model => item.sanPham.mota)</p>
+                    <div>
+                    </div>
+                </div>
+            }
+            @{
+                decimal totalall = 0;
+            }
+            @foreach (var item in Model.Items)
+            {
+                decimal total = item.quantity * (decimal)item.sanPham.gia.Value * (decimal)item.sanPham.giamgia.Value;
+                decimal total2 = item.quantity * (decimal)item.sanPham.gia.Value - (decimal)total;
+                totalall = totalall + total2;
+            }
+            <div style=" display: flex; justify-content: space-between;">
+                <div style="display: flex; margin-top: 200px;">
+                    <p style="margin-right: 15px;">Tổng Tiền</p>
+                    <p class="price">@totalall giá này đã được áp dụng khuyến mãi</p>
+                </div>
+                <form id="orderForm" method="post" action="@Url.Action("DatHang","GioHang")">
+                    <!-- Các phần khác của form -->
+                    <div class="form-group" style="display:flex;">
+                        <div><p style="width:200px">Phương Thức Thanh Toán</p></div>
+                        <div class="col-md-10">
+                            <select id="phuongthuctt" name="phuongthuctt" style="border: 0px; border-bottom: 0.5px solid #00000030; margin-left: 20px; width: 500px;">
+                                <option value="ThanhToanKhiNhanHang">Thanh Toán Khi Nhận Hàng</option>
+                                <option value="ThanhToanBangNganHang">Thanh Toàn Bằng Ngân Hàng</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div style="margin-top: 200px;">
+                    <a href="@Url.Action("DatHang","GioHang")" style=" color: red; font-size: 20px;">Đặt Hàng</a>
+                </div>
+            </div>
+        </tbody>
+
+    </table>
+}
+else
+{
+    @Html.Partial("EmptyCart")
+}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var priceElements = document.querySelectorAll(".price");
+
+        priceElements.forEach(function (element) {
+            var priceValue = element.textContent;
+            var formattedPrice = formatPrice(priceValue);
+            element.textContent = formattedPrice;
+        });
+
+        function formatPrice(price) {
+            // Chuyển đổi thành số nguyên
+            var integerPart = parseInt(price);
+            // Thêm dấu phẩy ngăn cách hàng ngàn
+            var formattedPrice = integerPart.toLocaleString("vi-VN");
+            // Thêm đơn vị tiền tệ
+            formattedPrice += " đ";
+            return formattedPrice;
+        }
+    });
+</script>

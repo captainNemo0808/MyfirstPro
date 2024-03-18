@@ -1,0 +1,45 @@
+﻿@model CNPMNC1.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "DangNhap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<body style="max-width:12000px; margin:auto;">
+    <div style="margin-top: 100px;text-align: center; margin-bottom: 25px;">
+        <h2 style=" padding: 30px 0px;">Đăng Nhập Smember</h2>
+        <div>
+            <img src="~/Content/images/img.jpg" />
+        </div>
+        @using (Html.BeginForm("Dangnhap", "DangnhapDangky"))
+        {
+            @Html.AntiForgeryToken()
+            <div>
+                <tr>
+                    <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                        <p style=" margin: 0px;">Nhập Email Tài Khoản: </p>
+                        <input id="email" name="email" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+                    <td>@Html.ValidationMessageFor(model => model.email)</td>
+            </div>
+            </tr>
+            <tr>
+                <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                    <p style=" margin: 0px;">Nhập Mật Khẩu Tài Khoản: </p>
+                    <input id="pass" name="pass" type="password" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+                <td>@Html.ValidationMessageFor(model => model.pass)</td>
+                @if (ViewBag.ErrorInfo == null)
+                {
+                    <p> @ViewBag.ErrorInfo</p>
+                }
+        </div>
+        </tr>
+        <tr>
+            <div style="padding: 20px 0px; ">
+            <td><a href="@Url.Action("Dangky","DangnhapDangky")" style="padding: 6px 40px; border-radius: 10px; border: 1px; margin-right: 20px; background-color: #ff255b; color: black; text-decoration: none; ">Đăng Ký</a></td>
+            <td><input type="submit" value="Đăng Nhập" style=" padding: 5px 30px; border-radius: 10px; border: 1px; background-color: #ff255b;" /></td>
+            </div>
+        </tr>
+        </div>
+    }
+        </div>
+</body>
+

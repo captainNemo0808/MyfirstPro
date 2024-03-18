@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="~/Scripts/script.js"></script>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+        <div class="container">
+            @Html.ActionLink("MobileShop", "Index2", "SanPham", new { area = "" }, new { @class = "navbar-brand" })
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1" style="display: flex; justify-content: right;">
+                    <li><span style="margin:0px;"><a style="text-decoration: none;" href="@Url.Action("ShowCart","GioHang")"><img src="~/Content/images/user.jpg" style="height: 30px; width: 30px; margin-top: 10px; border-radius: 50%;" />@Html.Action("BagCart", "GioHang")</a></span></li>
+                    <div style="margin-top: 10px;">
+                        @if (Session["ID"] != null)
+                        {
+                            string idtk = Session["ID"] as string;
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Danhsachdonhang", "NguoiDung")">ĐƠn Hàng CỦa Bạn</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Index2", "DangNhapDangKy", new {id = idtk})">Tài Khoản của bạn</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Dangxuat", "DangNhapDangKy")">Đăng Xuất</a>
+                        }
+                        @if (Session["Email"] != null)
+                        {
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Index", "SanPham")">Sản Phẩm</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("DoanhThu", "GioHang")">Doanh Thu</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Create", "SanPham")">Thêm Sản Phẩm</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Index", "DangNhapDangKy")">Tài Khoản khách hàng</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Danhsachdonhang2", "NguoiDung")">Quản Lý Đơn Hàng</a>
+                            <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("Dangxuat", "DangNhapDangKy")">Đăng Xuất</a>
+                        }
+                        <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("DangNhap", "DangNhapDangKy")">Đăng Nhập</a>
+                        <a style="padding: 0px 20px; color: white; text-decoration: none; margin-top: 10px;" href="@Url.Action("DangKy", "DangNhapDangKy")">Đăng Ký</a>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/script.js"></script>
+
+</body>
+</html>

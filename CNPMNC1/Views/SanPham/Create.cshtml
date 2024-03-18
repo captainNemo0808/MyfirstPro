@@ -1,0 +1,74 @@
+﻿@model CNPMNC1.Models.SanPham
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <script src="~/Scripts/script.js"></script>
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "SanPham", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <table>
+        <tr>
+            <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                <p style=" margin: 0px;">Nhập Tên sản phẩm: </p>
+                <input id="tensanpham" name="tensanpham" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+            <td>@Html.ValidationMessageFor(model => model.tensanpham)</td>
+            </div>
+        </tr>
+        <tr>
+            <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                <p style=" margin: 0px;">Nhập THương Hiệu Sản Phẩm: </p>
+                <input id="thuonghieu" name="thuonghieu" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+            <td>@Html.ValidationMessageFor(model => model.thuonghieu)</td>
+            </div>
+        </tr>
+        <tr>
+            <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                <p style=" margin: 0px;">Nhập Năm Sản Xuất sản phẩm: </p>
+                <input id="namsx" name="namsx" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+            <td>@Html.ValidationMessageFor(model => model.namsx)</td>
+            </div>
+        </tr>
+        <tr>
+            <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                <p style=" margin: 0px;">Nhập Mô Tả sản phẩm: </p>
+                <input id="mota" name="mota" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+            <td>@Html.ValidationMessageFor(model => model.mota)</td>
+            </div>
+        </tr>
+        <tr>
+            <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                <p style=" margin: 0px;">Nhập Loại sản phẩm: </p>
+                <input id="loai_sanpham" name="loai_sanpham" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+            <td>@Html.ValidationMessageFor(model => model.loai_sanpham)</td>
+            </div>
+        </tr>
+        <tr>
+            <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+                <p style=" margin: 0px;">Nhập Giá Sản Phẩm: </p>
+                <input id="gia" name="gia" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+            <td>@Html.ValidationMessageFor(model => model.gia)</td>
+            </div>
+        </tr>
+        <tr>
+            <div style=" margin-left: 400px; padding: 30px 0px; ">
+                <div>
+                    <p>Hình Ảnh Sản Phẩm</p>
+                    <p>
+                        <img src="@Url.Content(Model.ImagePro)" height="150" width="150" id="previewImg" />
+                    </p>
+                </div>
+                <div>
+                    <p>
+                        <input type="file" name="Uploadlmage" onchange="ChangeImage(this, document.getElementById('previewImg'))" />
+                    <p><input type="submit" value="Tạo Sản Phẩm" style=" padding: 5px 30px; border-radius: 10px; border: 1px; background-color: #ff255b;" /></p>
+                </div>
+            </div>
+        </tr>
+    </table>
+
+}
+<script src="~/Scripts/script.js"></script>

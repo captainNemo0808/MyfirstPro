@@ -1,0 +1,389 @@
+﻿@model IEnumerable<CNPMNC1.Models.SanPham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <link href="~/Views/MasterStyle1.css" rel="stylesheet" />
+    <link rel="stylesheet" href=" https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+<style>
+    .count-number {
+        background-color: white;
+        font-size: 1.6rem;
+        color: red;
+        border: 20px;
+    }
+
+    .counter-text {
+        color: white;
+    }
+
+    .slideshow-container {
+        position: relative;
+        text-align: center;
+    }
+
+    .mySlides {
+        display: none;
+    }
+
+        .mySlides img {
+            height: 600px; /* Thay đổi chiều cao tối đa nếu cần */
+            width: 500px;
+            margin-left: 90px; /* Căn giữa hình ảnh theo chiều ngang */
+            display: block;
+        }
+
+    .slide-controls {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+    }
+
+    .prev {
+        left: 0;
+        float: left; /* Đặt nút prev bên trái */
+        font-size: 30px;
+        cursor: pointer;
+        margin-left: 75px;
+        position: relative;
+        top: -300px;
+    }
+
+    .next {
+        right: 0;
+        float: right; /* Đặt nút next bên phải */
+        font-size: 30px;
+        cursor: pointer;
+        position: relative;
+        margin-right: 530px;
+        position: relative;
+        top: -300px; /* Điều chỉnh giá trị này để di chuyển lên hoặc xuống */
+    }
+
+
+    .hero-banner {
+        margin: 0 auto;
+        display: flex;
+        width: 1200px;
+        padding: 0px 0px;
+    }
+
+    .banner-left {
+        margin: 0 !important;
+        width: 66.67% !important;
+    }
+
+    .banner-right {
+        width: 33.33% !important;
+    }
+
+        .banner-right img {
+            width: 100%;
+            object-fit: cover;
+            margin-left: 10px;
+        }
+
+    .underposter {
+        background-color: aliceblue;
+        width: auto !important;
+        height: 70px !important;
+    }
+
+    .sale img {
+        margin-left: 30px !important;
+    }
+
+    .flashsale {
+        background-color: darkred !important;
+        width: 700px;
+        height: 1000px;
+    }
+
+    .img-fls {
+        width: 10px;
+        height: 10px;
+        margin-left: 30px;
+    }
+
+
+    .product-suggestions {
+        margin: 0px !important;
+        margin-left: 20px;
+    }
+
+    #div-pro-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0px 5px 20px 5px;
+    }
+
+    .icon-sale-containter {
+        display: flex;
+    }
+
+    .box-pro {
+        width: 25%;
+        padding: 10px;
+        border-radius: 5px 5px 0px 0px;
+        border: 0px solid #ccc; /* Đường viền */
+        padding: 10px; /* Khoảng cách bên trong sản phẩm */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Hiệu ứng bóng đổ */
+    }
+
+    .size-img {
+        height: auto;
+        width: 100%;
+        border-radius: 5px 5px 0px 0px;
+    }
+
+    .margin-des {
+    }
+
+    .margin-des-1 {
+        margin-right: 20px;
+        color: #505451;
+    }
+
+    .margin-des-2 {
+        margin-right: 20px;
+        color: darkred;
+    }
+
+    .box-description {
+        width: auto;
+        text-align: center;
+        padding: 10px 20px;
+        margin: 0; /* Loại bỏ khoảng cách xung quanh văn bản */
+    }
+
+        .box-description a {
+            text-decoration: none;
+            margin: 0px;
+        }
+
+    .del {
+        text-decoration: line-through;
+    }
+
+    .item-sale-container {
+        margin: -10px 0px 0px 0px;
+        padding: 0px 16.5px 0px 17px;
+    }
+
+        .item-sale-container .item-sale-col:first-child {
+            padding-right: 6px;
+        }
+
+    .item-sale-col {
+        width: 50%;
+        background-color: #D0011B;
+    }
+
+    .item-sale-title {
+        justify-content: space-between !important;
+        align-items: center;
+        padding: 15px 10px 0px 10px;
+    }
+
+    .item-sale-container .item-sale-col:first-child {
+        padding-right: 6px;
+    }
+
+    .item-sale-col {
+        width: 50%;
+        background-color: #D0011B;
+    }
+</style>
+<div style="display: flex; padding: 0px 0px; flex-direction: column-reverse; ">
+    <div style="display: flex;">
+        <div style="margin-left: 30px;">
+            <div class="hero-banner-container">
+                <div class="hero-banner">
+                    <div id="banner-left" class="w3-content w3-display-container banner-left">
+                        <img class="mySlidesA" src="~/Content/images/15.jpg" style="width: 807px;">
+
+                        <img class="mySlidesA" src="~/Content/images/16.jpg" style="width: 807px;">
+                        <img class="mySlidesA" src="~/Content/images/11.jpg" style="width: 807px;">
+                        <img class="mySlidesA" src="~/Content/images/12.jpg" style="width: 807px;">
+
+                        <button style=" font-size: 30px;position: relative;top: -130px " ; class="w3-button w3-black w3-display-left" onclick="plusDiv(-1)">&#10094; </button>
+                        <button style=" font-size: 30px; position: relative; top: -190px; margin-left: 754px; " ; class="w3-button w3-black w3-display-right" onclick="plusDiv(1)">&#10095;</button>
+                    </div>
+                    <div class="banner-right">
+                        <img src="~/Content/images/13.jpg" alt="Alternate Text" />
+                        <img src="~/Content/images/14.jpg" alt="Alternate Text" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("Index2", "SanPham", FormMethod.Get))
+{
+    <tr>
+        <div style="display: flex; margin-left: 400px; padding: 30px 0px; ">
+            <input name="name" type="text" value="" style="border: 0px; border-bottom: 0.5px solid#00000030; margin-left: 20px; width: 500px; ">
+        <td><input type="submit" value="Tìm Kiếm" style=" padding: 5px 30px; border-radius: 10px; border: 1px; background-color: #ff255b;" /></td>
+        </div>
+    </tr>
+
+    <h2 style="padding: 50px 0px;">Danh sách sản phẩm</h2>
+    <div class="container">
+        <div class="row">
+            @foreach (var pro in Model)
+            {
+                <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3" style="width: 200px; margin-bottom: 30px; padding: 0px; margin-right: 50px; padding-bottom: 10px; border-radius: 20px; box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15); ">
+                    <div class="card-pro">
+                        <img src="@Url.Content(pro.ImagePro)" height="150" width="150" style="border-radius: 16px; width: 200px;" />
+                        <p style="padding: 5px 20px">@Html.DisplayFor(model => pro.tensanpham)</p>
+                        <p class="price" style="padding: 5px 20px; color: red; font-weight: 700;">@Html.DisplayFor(model => pro.gia) </p>
+                        <a style="padding: 5px 20px; text-decoration: none; color: red; " href="@Url.Action("AddToCart","GioHang", new {id = pro.idsanpham})">Buy</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var priceElements = document.querySelectorAll(".price");
+            priceElements.forEach(function (element) {
+                var priceValue = element.textContent;
+                var formattedPrice = formatPrice(priceValue);
+                element.textContent = formattedPrice;
+            });
+
+            function formatPrice(price) {
+                // Chuyển đổi thành số nguyên
+                var integerPart = parseInt(price);
+                // Thêm dấu phẩy ngăn cách hàng ngàn
+                var formattedPrice = integerPart.toLocaleString("vi-VN");
+                // Thêm đơn vị tiền tệ
+                formattedPrice += " đ";
+                return formattedPrice;
+            }
+        });
+    </script>
+    @*<table class="table">
+        <h2 style="padding: 50px 0px;">Danh sách sản phẩm</h2>
+        <div class="container">
+            <div class="row">
+                @foreach (var pro in Model)
+                {
+                    <div class="col-sm-12 col-sm-6 col-md-4 col-lg-3" style="width: 200px; margin-bottom: 30px; padding: 0px; margin-right: 50px; padding-bottom: 10px; border-radius: 20px; box-shadow: 0 1px 2px 0 rgba(60,64,67,.1), 0 2px 6px 2px rgba(60,64,67,.15); ">
+                        <div class="card-pro">
+                            <img src="@Url.Content(pro.ImagePro)" height="150" width="150" style="border-radius: 16px; width: 200px;" />
+                            <p style="padding: 5px 20px">@Html.DisplayFor(model => pro.tensanpham)</p>
+                            <p class="price" style="padding: 5px 20px; color: red; font-weight: 700;">@Html.DisplayFor(model => pro.gia) </p>
+                            <a style="padding: 5px 20px; text-decoration: none; color: red; " href="@Url.Action("AddToCart","GioHang", new {id = pro.idsanpham})">Buy</a>
+                        </div>
+                    </div>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            var priceElements = document.querySelectorAll(".price");
+
+                            priceElements.forEach(function (element) {
+                                var priceValue = element.textContent;
+                                var formattedPrice = formatPrice(priceValue);
+                                element.textContent = formattedPrice;
+                            });
+
+                            function formatPrice(price) {
+                                // Chuyển đổi thành số nguyên
+                                var integerPart = parseInt(price);
+                                // Thêm dấu phẩy ngăn cách hàng ngàn
+                                var formattedPrice = integerPart.toLocaleString("vi-VN");
+                                // Thêm đơn vị tiền tệ
+                                formattedPrice += " đ";
+                                return formattedPrice;
+                            }
+                        });
+                    </script>
+                }
+            </div>
+        </div>
+    </table>*@
+
+}
+<div style="display: flex; flex-direction: column;">
+    <div style="display: flex; justify-content: space-between; padding: 20px 0px; ">
+        <div><img src="~/Content/images/20.jpg" style=" height: 100px; margin-bottom: 15px; width:300px;" /></div>
+        <div><img src="~/Content/images/21.jpg" style=" height: 100px; margin-bottom: 15px; width: 300px;" /></div>
+        <div><img src="~/Content/images/22.jpg" style="height: 100px; margin-bottom: 15px; width: 300px; " /></div>
+        <div><img src="~/Content/images/23.jpg" style=" height: 100px; margin-bottom: 15px; width: 300px;" /></div>
+    </div>
+    <div style="display: flex; justify-content: space-between; padding:20px 0px;">
+        <div><img src="~/Content/images/24.jpg" style=" height: 100px; margin-bottom: 15px; width: 300px; " /></div>
+        <div><img src="~/Content/images/25.jpg" style=" height: 100px; margin-bottom: 15px; width: 300px;" /></div>
+        <div><img src="~/Content/images/26.jpg" style="height: 100px; margin-bottom: 15px; width: 300px; " /></div>
+        <div><img src="~/Content/images/27.jpg" style=" height: 100px; margin-bottom: 15px; width: 300px;" /></div>
+
+    </div>
+</div>
+<script>
+    var slideIndex = 0;
+    showDivs(slideIndex);
+
+    function plusDiv(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlidesA");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+    }
+    carousel();
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlidesA");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > x.length) { slideIndex = 1 }
+        x[slideIndex - 1].style.display = "block";
+        setTimeout(carousel, 3000); // Change image every 3 seconds
+    }
+    // Set the date we're counting down to
+    var countDownDate = new Date("Oct 10, 2024 24:00:00").getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor(((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("flash-sale-count").innerHTML = "<span id='counter-text'>Còn " + days + " ngày  </span><span class='count-number'>" + hours + "</span> : <span class='count-number'>"
+            + minutes + "</span> : <span class='count-number'>" + seconds + "</span>";
+        document.getElementById("flash-sale").innerHTML = "<span class='flash-sale-black'>" + (hours).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }) + "</span>  <span class='flash-sale-black'>"
+            + (minutes).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }) + "</span>  <span class='flash-sale-black'>" + (seconds).toLocaleString('en-US', { minimumIntegerDigits: 2, useGrouping: false }) + "</span>";
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("flash-sale-count").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+
+</script>

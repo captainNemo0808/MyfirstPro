@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CNPMNC1.Models.DoanhThu>
+
+@{
+    ViewBag.Title = "DoanhThu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DoanhThu</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ngaythanhtoan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tongtien)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idkh)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngaythanhtoan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tongtien)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idkh)
+        </td>
+    </tr>
+}
+
+</table>
